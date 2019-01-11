@@ -10,7 +10,25 @@ import Cocoa
 所以返回 [0, 1]
  */
 
-class Solution {
+
+class Solution2 {
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var dict = [Int:Int]()
+        
+        for i in 0..<nums.count {
+            if let j = dict[target-nums[i]] {
+                return [i,j]
+            }else{
+                dict[nums[i]] = i
+            }
+        }
+    
+        return [];
+    }
+}
+
+// 暴力遍历
+class Solution1 {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         let count = nums.count;
 
@@ -24,6 +42,6 @@ class Solution {
             }
             
         }
-        return [0,0];
+        return [];
     }
 }

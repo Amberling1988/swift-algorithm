@@ -5,11 +5,7 @@ import Cocoa
 
 class Sort {
     
-    
-    
-    /*
-     归并排序
-    */
+    /****************************************** 归 并 排 序 *************************************************/
     func merge(_ array1:[Int], _ array2:[Int])->[Int]{
         
         var a = [Int]()
@@ -46,7 +42,7 @@ class Sort {
         print(array)
         let tmpArray = array
         let n = array.count
-        let q = (0+n-1)/2
+        let q = (0+n-1)/2 // 从中间拆分为两个区
         
         let leftArray = mergeSortC(Array(tmpArray[0...q]))
         let rightArray = mergeSortC(Array(tmpArray[q+1...n-1]))
@@ -62,28 +58,62 @@ class Sort {
         return b
     }
     
-    /*******************************************************************************************/
-    
+    /****************************************** 快 速 排 序 *************************************************/
+
     /*
-     快速排序
+     * array：传入参数的数组，注意是传址不是传值
+     * p:排序区间起点下标
+     * r:排序区间终点点下标
      */
-    func quickSort(array:[Int]) -> [Int] {
-        var a = array
-        if array.count == 1 {
-            return array
+    private func partition(_ array:inout [Int], _ p:Int, _ r:Int) -> Int {
+        
+        let pivot = array[r] // 分界值，一般选数组排序区间末尾元素
+        
+        var i:Int = p
+        for j in p...r-1 {
+            
+            if array[j] < pivot{
+                
+                array.swapAt(i, j)
+                
+                i += 1 // 有小于pivot的数字i++
+            }
         }
         
+        // 交换 a[i] 与 a[r] 即：将pivot放到相应位置
+        array[r] = array[i]
+        array[i] = pivot
         
-        
-        
-        
-        
-        return a
+        return i //获取区分点排序下标
+    }
+    
+    /* array：传入参数的数组，注意是传址不是传值
+     * p:排序区间起点下标
+     * r:排序区间终点点下标
+     */
+    private func qucikSortC (_ array:inout [Int], _ p:Int, _ r:Int) -> [Int]{
+        // 需要排序的区间只包含一个数字，则不需要重排数组，直接返回
+        if p >= r {
+            return array
+        }
+       
+        let i = partition(&array, p, r)
+
+        qucikSortC(&array, p, i-1)
+        qucikSortC(&array, i+1, r)
+      
+        return array
+    }
+    
+    public func quickSort(_ array: [Int]) -> [Int] {
+        var a = array
+        return  qucikSortC(&a, 0, array.count-1)
     }
     
 }
 
 var sort = Sort()
-let array = sort.mergeSort(array: [11,8,3,9,7,1,2,5])
-print(array)
-//sort.merge([3,8,9,11], [1,2,5,7])
+let result = sort.quickSort([6,11,3,9,8,12,0])
+print(result)
+
+
