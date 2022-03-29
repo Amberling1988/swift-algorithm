@@ -5,6 +5,8 @@ import Cocoa
 
 class Sort {
     
+    
+    
     /****************************************** 归 并 排 序 *************************************************/
     func merge(_ array1:[Int], _ array2:[Int])->[Int]{
         
@@ -42,7 +44,7 @@ class Sort {
         print(array)
         let tmpArray = array
         let n = array.count
-        let q = (0+n-1)/2 // 从中间拆分为两个区
+        let q = (0+n-1)/2
         
         let leftArray = mergeSortC(Array(tmpArray[0...q]))
         let rightArray = mergeSortC(Array(tmpArray[q+1...n-1]))
@@ -74,7 +76,9 @@ class Sort {
             
             if array[j] < pivot{
                 
-                array.swapAt(i, j)
+                let tmp = array[i];
+                array[i] = array[j]
+                array[j] = tmp
                 
                 i += 1 // 有小于pivot的数字i++
             }
@@ -115,5 +119,4 @@ class Sort {
 var sort = Sort()
 let result = sort.quickSort([6,11,3,9,8,12,0])
 print(result)
-
 

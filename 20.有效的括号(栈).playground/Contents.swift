@@ -37,6 +37,10 @@ class Solution {
             return true
         }
         
+        if s.count%2 > 0 {
+            return false
+        }
+        
         let mapping:[Character:Character] = [ "(": ")", "{":"}", "[":"]" ]
         var stack = Stack<Character>()
         
