@@ -45,6 +45,7 @@ class Solution2 {
             while j > 0 && needle[i] != needle[j] {
                 j = next[j-1]
             }
+            
             if needle[i] == needle[j] {
                 j += 1
             }
@@ -57,4 +58,4 @@ class Solution2 {
 }
 
 let s = Solution2()
-s.strStr("abcaabcd", "abcd")
+s.strStr("abcaabcd", "abcabc")
